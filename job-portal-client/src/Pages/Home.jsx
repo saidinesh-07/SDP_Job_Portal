@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Jobs from './Jobs';
 import Card from '../components/Card';
 import Sidebar from '../sidebar/Sidebar'
+import NewsLetter from '../components/NewsLetter';
 
 const Home = () => {
 
@@ -138,7 +139,9 @@ const Home = () => {
         </div>
 
         {/* Right side */}
-        <div className='bg-white p-4 rounded'>Right</div>
+        <div className='bg-white p-4 rounded'>
+          <NewsLetter/>
+        </div>
       </div>
 
     </div>
