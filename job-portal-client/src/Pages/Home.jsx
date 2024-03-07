@@ -3,16 +3,21 @@ import Banner from "../components/Banner"
 import { useEffect, useState } from "react";
 import Jobs from './Jobs';
 import Card from '../components/Card';
+import Sidebar from '../sidebar/Sidebar'
 
 const Home = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [jobs, setJobs] = useState([])
+  const [isLoading,setIsLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage=6
 
   useEffect(()=>{
       fetch("jobs.json").then(res=>res.json()).then(data=>{
         //console.log(data);
         setJobs(data) 
+        setIsLoading(false)
       })
   }, [])
 
@@ -51,7 +56,7 @@ const Home = () => {
     if (selected){
       filteredJobs = filteredJobs.filter( ({jobLocation, maxPrice, experienceLevel, salaryType,
       employmentType, postingDate}) => {
-        jobLocation.toLowerCase() === selected.toLowerCase() ||
+        return jobLocation.toLowerCase() === selected.toLowerCase() ||
         parseInt(maxPrice) <= parseInt(selected) ||
         salaryType.toLowerCase() === selected.toLowerCase() ||
         employmentType.toLowerCase() === selected.toLowerCase()
@@ -73,10 +78,23 @@ const Home = () => {
       <div className='bg-[#FAFAFA] md:grid grid-cols-4 gap-8 lg:px-24 px-4 py-12'>
 
         {/* Left side */}
-        <div className='bg-white p-4 rounded'>Left</div>
+        <div className='bg-white p-4 rounded'>
+          <Sidebar handleChange={handleChange} handleClick={handleClick}/>
+        </div>
 
         {/* Job cards */}
-        <div className='col-span-2 bg-white p-4 rounded-sm'><Jobs result={result}/></div>
+        <div className='col-span-2 bg-white p-4 rounded-sm'>
+
+          {
+            isLoading ? (<p className='font-medium'>Loading....</p>) : 
+              result.length > 0 ? (<Jobs result={result}/>) : 
+                  <> 
+                  <h3 className='text-lg font-bold mb-2'>{result.length} Jobs</h3>
+                  <p>No data found</p>
+                  </>
+          }
+          
+        </div>
 
         {/* Right side */}
         <div className='bg-white p-4 rounded'>Right</div>
