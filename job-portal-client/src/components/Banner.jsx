@@ -24,7 +24,6 @@ const Banner = ({query, handleInputChange}) => {
                 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 md:w-1/3 w-full'>
                     <input type="text" name="title" id="title" placeholder='Location'
                     className='block flex-1 border-0 bg-transparent py-1.5 pl-8 text-grey-400 focus:right-0 sm:text-small sm:leading-6'
-                    value={query}
                     />
                         <FiMapPin className='absolute mt-2.5 ml-2 text-grey-400'/>
                 </div>
