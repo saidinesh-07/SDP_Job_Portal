@@ -15,7 +15,10 @@ const Home = () => {
   const itemsPerPage=6
 
   useEffect(()=>{
-      fetch("jobs.json").then(res=>res.json()).then(data=>{
+      // fetch("http://localhost:3000/all-jobs")
+      fetch("jobs.json")
+      .then(res=>res.json())
+      .then(data=>{
         //console.log(data);
         setJobs(data) 
         setIsLoading(false)
