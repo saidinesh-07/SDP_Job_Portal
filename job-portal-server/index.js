@@ -93,10 +93,11 @@ async function run() {
           ...jobData
         },
       }
-    })
-    
     const result = await jobCollections.updateOne(filter,updateDoc, options) 
     res.send(result)
+    })
+    
+    
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
